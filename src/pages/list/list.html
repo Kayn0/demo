@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -8,16 +8,276 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
+  <ion-row class="header-bg">
+    <h2 class="header">Racing</h2>    
+  </ion-row>
+
+  <ion-scroll scrollX="true" class="relative preferences">
+    <ion-row nowrap class="headerChip">
+      <ion-col><div class="circle"></div></ion-col>
+      <ion-col><div class="circle"></div></ion-col>
+      <ion-col><div class="circle"></div></ion-col>
+      <ion-col><div class="circle"></div></ion-col>
+      <ion-col><div class="circle"></div></ion-col>
+      <ion-col><div class="circle"></div></ion-col>
+      <ion-col><div class="circle"></div></ion-col>
+    </ion-row>
+  </ion-scroll>
+
+
+  <div>
+    <ion-segment mode="md" [(ngModel)]="segment">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="horses">
+        Horses
+      </ion-segment-button>
+      <ion-segment-button value="harness">
+        Harness
+      </ion-segment-button>
+      <ion-segment-button value="greyhounds">
+        Greyhounds
+      </ion-segment-button>
+    </ion-segment>
+    <ion-scroll #scroll scrollX="true" class="relative">
+      <ion-row nowrap class="headerChip">
+        <div class="left-arrow">
+          <ion-icon name="ios-arrow-back"></ion-icon>
+        </div>
+        <div class="filter" (click)="todayToggle = !todayToggle;" [ngClass]="{'selected': todayToggle}">Today</div>
+        <div class="filter" (click)="tomorrowToggle = !tomorrowToggle;" [ngClass]="{'selected': tomorrowToggle}" >Tomorrow</div>
+        <div class="filter" (click)="obToggle = !obToggle;" [ngClass]="{'selected': obToggle}">Odds Boost</div>
+        <div class="filter" (click)="quaddieToggle = !quaddieToggle;" [ngClass]="{'selected': quaddieToggle}">Quaddie</div>
+        <div class="filter" (click)="firstFourToggle = !firstFourToggle;" [ngClass]="{'selected': firstFourToggle}">First Four</div>
+        <div class="filter" (click)="videoToggle = !videoToggle;" [ngClass]="{'selected': videoToggle}">Live video</div>
+        <div class="right-arrow"><ion-icon name="ios-arrow-forward"></ion-icon></div>
+      </ion-row>
+    </ion-scroll>
   </div>
+
+  <div [ngSwitch]="segment" class="shadow">
+    <ion-list *ngSwitchCase="'all'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <div class="img-holder">
+            <img src="assets/img/horse.png" class="horse">
+          </div>
+        </ion-thumbnail>
+        <h2>Kembla Grange</h2>
+        <div item-right class="details">
+          <h4 class="to-left"><span>12</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/horse.png" class="horse">
+        </div>
+        </ion-thumbnail>
+        <h2>Mackay</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>5</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item> 
+
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/horse.png" class="horse">
+        </div>
+        </ion-thumbnail>
+        <h2>Moe</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>9</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-thumbnail item-start>
+          <div class="img-holder">
+            <img src="assets/img/harness.png" class="harness">
+          </div>
+        </ion-thumbnail>
+        <h2>Kembla Grange</h2>
+        <div item-right class="details">
+          <h4 class="to-left"><span>4</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/harness.png" class="harness">
+        </div>
+        </ion-thumbnail>
+        <h2>Mackay</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>6</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item> 
+
+      <ion-item>
+        <ion-thumbnail item-start>
+          <div class="img-holder">
+            <img src="assets/img/greyhound.png" class="harness">
+          </div>
+        </ion-thumbnail>
+        <h2>Albion Park</h2>
+        <div item-right class="details">
+          <h4 class="to-left"><span>6</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/greyhound.png" class="harness">
+        </div>
+        </ion-thumbnail>
+        <h2>Angle Park</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>14</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/greyhound.png" class="harness">
+        </div>
+        </ion-thumbnail>
+        <h2>Dapto</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>11</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item> 
+
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'horses'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <div class="img-holder">
+            <img src="assets/img/horse.png" class="horse">
+          </div>
+        </ion-thumbnail>
+        <h2>Kembla Grange</h2>
+        <div item-right class="details">
+          <h4 class="to-left"><span>12</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/horse.png" class="horse">
+        </div>
+        </ion-thumbnail>
+        <h2>Mackay</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>5</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item> 
+
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/horse.png" class="horse">
+        </div>
+        </ion-thumbnail>
+        <h2>Moe</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>9</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item> 
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'harness'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <div class="img-holder">
+            <img src="assets/img/harness.png" class="harness">
+          </div>
+        </ion-thumbnail>
+        <h2>Bendigo</h2>
+        <div item-right class="details">
+          <h4 class="to-left"><span>7</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/harness.png" class="harness">
+        </div>
+        </ion-thumbnail>
+        <h2>Penrith</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>3</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item> 
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'greyhounds'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <div class="img-holder">
+            <img src="assets/img/greyhound.png" class="harness">
+          </div>
+        </ion-thumbnail>
+        <h2>Albion Park</h2>
+        <div item-right class="details">
+          <h4 class="to-left"><span>6</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/greyhound.png" class="harness">
+        </div>
+        </ion-thumbnail>
+        <h2>Angle Park</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>14</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-thumbnail item-start>
+        <div class="img-holder">
+          <img src="assets/img/greyhound.png" class="harness">
+        </div>
+        </ion-thumbnail>
+        <h2>Dapto</h2>
+         <div item-right class="details">
+          <h4 class="to-left"><span>11</span> Markets</h4>
+          <ion-icon class="next-icon" name="ios-arrow-forward"></ion-icon>
+        </div>
+      </ion-item> 
+
+    </ion-list>
+
+  </div>
+
+
+ 
 </ion-content>
